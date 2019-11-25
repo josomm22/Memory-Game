@@ -8,8 +8,43 @@
 }
 .card{
     flex-grow: 1;
-    max-width: 40px;
-    height: 40px;
+    max-width: 100px;
+    height: 100px;
+    margin: 3px;
+}
+.card1 {
+    background-image: url('../img/ca1.jpg');
+    background-size: cover;
+    
+    }
+.card2 {
+    background-image: url('../img/ca2.jpg');
+    background-size: cover;
+    
+    }
+.card3 {
+    background-image: url('../img/ca3.jpg');
+    background-size: cover;
+    
+    }
+.card4 {
+    background-image: url('../img/ca4.jpg');
+    background-size: cover;
+    
+    }
+.card5 {
+    background-image: url('../img/ca5.jpg');
+    background-size: cover;
+    
+    }
+.card6 {
+    background-image: url('../img/ca6.jpg');
+    background-size: cover;
+    
+    }
+.card.hidden{
+    background-image: none;
     background-color: blueviolet;
-    margin: 1px;
+
+
 }

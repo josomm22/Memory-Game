@@ -1,7 +1,10 @@
-let pairs = ['a','b','c','d','e']
+$(document).ready(function(){
+    $('.card').bind('click',flipCard)
 
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+    function flipCard(x){
+        // console.log($(this).attr('id'));
+        $(this).removeClass('hidden');
+    }
+
+    
+})
