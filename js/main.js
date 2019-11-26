@@ -1,16 +1,21 @@
 
 $(document).ready(function () {
     $('.card').bind('click', flipCard)
+    
     let pick1;
     let pick2;
     let attempts = 0;
     const allCards = document.getElementsByClassName('card');
-
+    // console.log(allCards[0]);
+    // for (const property in allCards){
+    //     console.log(`${allCards[property]}`);
+    // };
+    // allCards.forEach(a => console.log(a));
 
     function flipCard(x) {
         // console.log($(this).attr('id'));
-        
-        if ((this).classList.contains('hidden')){
+
+        if ((this).classList.contains('hidden')) {
             if (pick1 === undefined) {
                 $(this).removeClass('hidden');
                 pick1 = $(this);
@@ -22,15 +27,15 @@ $(document).ready(function () {
                 console.log(`pick 2 is ${pick2.attr('id')}`);
                 setTimeout(checkCards, 500);
                 // checkCards(pick1,pick2);
-    
-    
+
+
             } else if (pick1 != undefined && pick2 != undefined) {
                 console.log('naughty naughty');
             }
-        }else{
+        } else {
             console.log('this is already flipped');
         }
-        
+
 
     };
 
@@ -39,11 +44,12 @@ $(document).ready(function () {
         if (pick1.attr('class') === pick2.attr('class')) {
             console.log('well done');
             attempts += 1;
-            
-            if (gameWon()){
-                console.log('congratulations');
 
-            }else{
+            if (gameWon()) {
+                console.log('congratulations');
+                startAgain();
+
+            } else {
                 pick1 = undefined;
                 pick2 = undefined;
             }
@@ -63,13 +69,22 @@ $(document).ready(function () {
         $(pick2).addClass('hidden');
 
     };
-    function gameWon(){
+    function gameWon() {
         let hiddenCards = document.getElementsByClassName('hidden');
-        if(hiddenCards.length === 0){
+        if (hiddenCards.length === 0) {
             return true;
-        }else{
+        } else {
             return false;
         };
     };
+    function startAgain() {
+        pick1 = undefined;
+        pick2 = undefined;
+        for (let i = 0; i < allCards.length; i++) {
+            $(allCards[i]).addClass('hidden');
+            
+        }
+        
+    }
 
 })
