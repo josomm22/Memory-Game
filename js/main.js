@@ -6,6 +6,8 @@ $(document).ready(function () {
     let pick1;
     let pick2;
     let attempts = 0;
+    $('#attempt').text(attempts);
+
     const allCards = document.getElementsByClassName('card');
 
     function distributeCards(cardArr){
@@ -15,6 +17,7 @@ $(document).ready(function () {
             
         }
     };
+    // remove commentout and remove the cardnumbers in the html
     // distributeCards(cardList);
 
     function flipCard(x) {
@@ -30,7 +33,7 @@ $(document).ready(function () {
                 $(this).removeClass('hidden');
                 pick2 = $(this);
                 console.log(`pick 2 is ${pick2.attr('id')}`);
-                setTimeout(checkCards, 2000);
+                setTimeout(checkCards, 1000);
 
 
             } else if (pick1 != undefined && pick2 != undefined) {
@@ -45,9 +48,11 @@ $(document).ready(function () {
 
     // This function checks if both card picks are the same
     function checkCards() {
+        attempts += 1;
+        $('#attempt').text(attempts);
+
         if (pick1.attr('class') === pick2.attr('class')) {
             console.log('well done');
-            attempts += 1;
 
             if (gameWon()) {
                 console.log('congratulations');
@@ -60,7 +65,6 @@ $(document).ready(function () {
         }
         else {
             console.log('too bad');
-            attempts += 1;
             flipBack(pick1, pick2);
             pick1 = undefined;
             pick2 = undefined;
