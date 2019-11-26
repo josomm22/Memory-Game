@@ -1,16 +1,21 @@
 
 $(document).ready(function () {
     $('.card').bind('click', flipCard)
-    
+    const cardList =  ['card1','card1','card2','card2','card3','card3','card4','card4','card5','card5','card6','card6',];
+
     let pick1;
     let pick2;
     let attempts = 0;
     const allCards = document.getElementsByClassName('card');
-    // console.log(allCards[0]);
-    // for (const property in allCards){
-    //     console.log(`${allCards[property]}`);
-    // };
-    // allCards.forEach(a => console.log(a));
+
+    function distributeCards(cardArr){
+        let cardShuffle = shuffle(cardArr);
+        for (let i = 0; i < allCards.length; i++) {
+            $(allCards[i]).addClass(`${cardShuffle[i]}`);
+            
+        }
+    };
+    // distributeCards(cardList);
 
     function flipCard(x) {
         // console.log($(this).attr('id'));
@@ -25,8 +30,7 @@ $(document).ready(function () {
                 $(this).removeClass('hidden');
                 pick2 = $(this);
                 console.log(`pick 2 is ${pick2.attr('id')}`);
-                setTimeout(checkCards, 500);
-                // checkCards(pick1,pick2);
+                setTimeout(checkCards, 2000);
 
 
             } else if (pick1 != undefined && pick2 != undefined) {
@@ -86,5 +90,23 @@ $(document).ready(function () {
         }
         
     }
+    // this code comes from bost.ocks.org
+    function shuffle(array) {
+        var m = array.length, t, i;
+      
+        // While there remain elements to shuffle…
+        while (m) {
+      
+          // Pick a remaining element…
+          i = Math.floor(Math.random() * m--);
+      
+          // And swap it with the current element.
+          t = array[m];
+          array[m] = array[i];
+          array[i] = t;
+        }
+      
+        return array;
+      }
 
 })
