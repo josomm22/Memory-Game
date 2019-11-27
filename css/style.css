@@ -91,38 +91,35 @@ background-repeat: no-repeat;
     border: 1px solid black;
     border-radius: 50%;
 }
-.easy{
+#easy{
     background-color: rgb(114, 209, 181);
     transform: rotate(10deg);
     animation: pulse 1s linear infinite;
     animation-play-state: paused; 
 }
-.easy:hover{
+#easy:hover{
     animation-play-state: running;
 
 }
-.medium{
+#medium{
     background-color: rgb(114, 171, 209);
     transform: rotate(-10deg);
     animation: pulse 1s linear infinite;
     animation-play-state: paused; 
 }
-.medium:hover{
+#medium:hover{
     animation-play-state: running;
 
 }
-.hard{
+#hard{
     background-color: rgb(245, 67, 67);
     transform: rotate(15deg);
     animation: pulse 1s linear infinite;
     animation-play-state: paused; 
 }
-.hard:hover{
+#hard:hover{
     animation-play-state: running;
 
-}
-.hard:active{
-    border: 2px solid red;
 }
 
 @keyframes pulse{
@@ -131,8 +128,7 @@ background-repeat: no-repeat;
     100% {transform: scale(1); }
 }
 .card-container{
-    display: none;
-    /* display: flex; */
+    display: flex;
     text-decoration: salmon;
 }
 .card-row{

@@ -1,14 +1,33 @@
- 
+$('.card-container').hide();
+let difficulty = 'easy';
+$('.diff').bind('click', function(){
+    difficulty = $(this).attr('id');
+    console.log(difficulty);
+ });
+
+$('#start-btn').bind('click',startGame);
+function startGame(){
+    $('.start-menu').hide();
+    generateCards();
+    $('.card-container').show();
+
+}
+
 function generateCards(){
     let gameTypes = {easy: 12,medium:18, hard:24};
-    tempCardList = createCardList(gameTypes.medium);
+    tempCardList = createCardList(gameTypes[difficulty]);
+    console.log(tempCardList);
+    for (let i = 0; i < tempCardList.length; i++) {
+        
+        
+    }
     
     
 }
 function createCardList(amount){
     let tempArr = [];
     let i = 1;
-    while (tempArr.length <= amount/2){
+    while (tempArr.length < amount){
         tempArr.push(`card${i}`);
         tempArr.push(`card${i}`);
         i++;
