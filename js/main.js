@@ -49,8 +49,8 @@ function createCardList(amount) {
         tempArr.push(`card${i}`);
         i++;
     }
-    // return shuffle(tempArr);
-    return tempArr;
+    return shuffle(tempArr);
+    // return tempArr;
 }
 const cardList = ['card1', 'card1', 'card2', 'card2', 'card3', 'card3', 'card4', 'card4', 'card5', 'card5', 'card6', 'card6',];
 
