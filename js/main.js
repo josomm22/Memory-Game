@@ -1,6 +1,5 @@
-let defaultImg = ['./img/ca1.jpg', './img/ca2.jpg', './img/ca3.jpg', './img/ca4.jpg', './img/ca5.jpg', './img/ca6.jpg', './img/ca7.jpg', './img/ca8.jpg', './img/ca9.jpg', './img/ca10.jpg'];
+let defaultImg = ['./img/ca1.jpg', './img/ca2.jpg', './img/ca3.jpg', './img/ca4.jpg', './img/ca5.jpg', './img/ca6.jpg', './img/ca7.jpg', './img/ca8.jpg', './img/ca9.jpg', './img/ca10.jpg', './img/ca11.jpg', './img/ca12.jpg'];
 
-$(document).ready(function () {
     $('.card-container').hide();
     let difficulty = 'easy';
     $('.diff').on('click', function () {
@@ -27,7 +26,7 @@ $(document).ready(function () {
             cardInner = $('<div/>').addClass(`flip-card-inner`);
             cardFront = $('<div/>').addClass(`flip-card-front`);
             cardBack = $('<div/>').addClass(`flip-card-back`);
-            imgFront = $('<img />').attr("src", `${defaultImg[tempCardList[i][4]]}`);
+            imgFront = $('<img />').attr("src", `${defaultImg[tempCardList[i].slice(4,)]}`);
             imgBack = $('<img />').attr("src", "./img/backcard.jpg");
             $(cardBack).append(imgBack);
             $(cardFront).append(imgFront);
@@ -49,8 +48,8 @@ $(document).ready(function () {
             tempArr.push(`card${i}`);
             i++;
         }
-        // return shuffle(tempArr); comment out if you want shuffle
-        return tempArr;
+        return shuffle(tempArr); 
+        // return tempArr;
     }
     const cardList = ['card1', 'card1', 'card2', 'card2', 'card3', 'card3', 'card4', 'card4', 'card5', 'card5', 'card6', 'card6',];
 
@@ -166,4 +165,3 @@ $(document).ready(function () {
         return array;
     }
 
-})
