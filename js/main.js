@@ -4,22 +4,22 @@ let pick2;
 let attempts = 0;
 let difficulty = 'easy';
 let hScore = {
-    easy:[[59,'hakuna'],[58,'kakuna'],[57,'papi'],[56,'rere'],[55,'rerer'],[54,'yyytt']],
-    medium: [[64,'hakuna'],[63,'kakuna'],[62,'papi'],[61,'rere'],[60,'rerer']],
-    hard: [[70,'hakuna'],[69,'kakuna'],[68,'papi'],[67,'rere'],[66,'rerer']],
+    easy: [[59, 'hakuna'], [58, 'kakuna'], [57, 'papi'], [56, 'rere'], [55, 'rerer'], [54, 'yyytt']],
+    medium: [[64, 'hakuna'], [63, 'kakuna'], [62, 'papi'], [61, 'rere'], [60, 'rerer'], [59, 'yyytt']],
+    hard: [[70, 'hakuna'], [69, 'kakuna'], [68, 'papi'], [67, 'rere'], [66, 'rerer'], , [65, 'yyytt']],
 }
 $('.modal').hide();
 $('.card-container').hide();
-$('.start-menu').hide();
+$('.start-menu').show();
 
 
 showStartMenu();
 updateHScore();
 
-function updateHScore(){
+function updateHScore() {
     for (let i = 0; i < 7; i++) {
-        $(`#place${i}`).text(hScore[difficulty][i]);
-        
+        $(`#place${i}`).text(`${hScore[difficulty][i][1]} score: ${hScore[difficulty][i][0]}`);
+
     }
 };
 
@@ -30,7 +30,6 @@ function showStartMenu() {
     $('#attempt').text(attempts);
     $('.diff').on('click', function () {
         difficulty = $(this).attr('id');
-        console.log(difficulty);
     });
 
 };
@@ -55,7 +54,6 @@ function generateCards() {
     let gameTypes = { easy: 12, medium: 18, hard: 24 };
     let tempCardList = [];
     tempCardList = createCardList(gameTypes[difficulty]);
-    console.log(tempCardList);
     for (let i = 0; i < tempCardList.length; i++) {
         cardOuter = $('<div/>').addClass(`card hidden ${tempCardList[i]}`).attr({ 'id': `card${i}` });
         cardInner = $('<div/>').addClass(`flip-card-inner`);
@@ -103,33 +101,22 @@ function createCardList(amount) {
     }
 }
 
-// const cardList = ['card1', 'card1', 'card2', 'card2', 'card3', 'card3', 'card4', 'card4', 'card5', 'card5', 'card6', 'card6',];
-
-
-
-// const allCards = document.getElementsByClassName('card');
-
 function flipCard(x) {
-    // console.log($(this).attr('id'));
 
     if ((this).classList.contains('hidden')) {
         if (pick1 === undefined) {
             $(this).removeClass('hidden');
             pick1 = $(this);
-            console.log(`pick 1 is ${pick1.attr('id')}`)
         }
         else if (pick1 != undefined && pick2 === undefined) {
             $(this).removeClass('hidden');
             pick2 = $(this);
-            console.log(`pick 2 is ${pick2.attr('id')}`);
-            setTimeout(checkCards, 1000);
+            setTimeout(checkCards, 800);
 
 
         } else if (pick1 != undefined && pick2 != undefined) {
-            console.log('naughty naughty');
         }
     } else {
-        console.log('this is already flipped');
     }
 
 
@@ -141,7 +128,6 @@ function checkCards() {
     $('#attempt').text(attempts);
 
     if (pick1.attr('class') === pick2.attr('class')) {
-        console.log('well done');
 
         if (gameWon()) {
             congratulator();
@@ -152,7 +138,6 @@ function checkCards() {
         }
     }
     else {
-        console.log('too bad');
         flipBack(pick1, pick2);
         pick1 = undefined;
         pick2 = undefined;
@@ -175,10 +160,20 @@ function gameWon() {
 };
 function congratulator() {
     $('.modal').show();
+    $('.button-holder').hide();
+    $(".new-highscore").hide();
     confetti.start();
+    setTimeout(confetti.stop, 2000);
     $('#backToStart').on('click', startMenu);
     $('#replay').on('click', startAgain);
-    setTimeout(confetti.stop, 2000);
+    if (attempts < hScore[difficulty][5][0]) {
+        $(".new-highscore").show();
+        $('#name-input').on('click', highScoreUpdate);
+    } else {
+        $('.button-holder').show();
+    }
+
+
 
     function startMenu() {
         $('.modal').hide();
@@ -190,6 +185,16 @@ function congratulator() {
         $('.modal').hide();
         $('.card').remove();
         startGame()
+    }
+
+    function highScoreUpdate() {
+        let newName = $('#new-name').val();
+        hScore[difficulty].splice(5, 1);
+        hScore[difficulty].unshift([attempts, newName]);
+        $(".new-highscore").hide();
+        $('.button-holder').show();
+        updateHScore();
+
     }
 }
 
