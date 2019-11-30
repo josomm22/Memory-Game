@@ -165,9 +165,6 @@ function flipCard() {
 
 };
 
-
-
-
 function gameWon() {
     let hiddenCards = document.getElementsByClassName('hidden');
     if (hiddenCards.length === 0) {
@@ -176,6 +173,7 @@ function gameWon() {
         return false;
     };
 };
+
 function congratulator() {
     $('.modal').show();
     $('.button-holder').hide();
@@ -190,8 +188,6 @@ function congratulator() {
     } else {
         $('.button-holder').show();
     }
-
-
 
     function startMenu() {
         $('.modal').hide();
