@@ -2,18 +2,41 @@ let defaultImg = ['./img/ca1.jpg', './img/ca2.jpg', './img/ca3.jpg', './img/ca4.
 let pick1;
 let pick2;
 let attempts = 0;
-$('#attempt').text(attempts);
+let difficulty = 'easy';
+let hScore = {
+    easy:[[59,'hakuna'],[58,'kakuna'],[57,'papi'],[56,'rere'],[55,'rerer'],[54,'yyytt']],
+    medium: [[64,'hakuna'],[63,'kakuna'],[62,'papi'],[61,'rere'],[60,'rerer']],
+    hard: [[70,'hakuna'],[69,'kakuna'],[68,'papi'],[67,'rere'],[66,'rerer']],
+}
 $('.modal').hide();
 $('.card-container').hide();
-let difficulty = 'easy';
+$('.start-menu').hide();
 
 
-$('.diff').on('click', function () {
-    difficulty = $(this).attr('id');
-    console.log(difficulty);
-});
+showStartMenu();
+updateHScore();
+
+function updateHScore(){
+    for (let i = 0; i < 7; i++) {
+        $(`#place${i}`).text(hScore[difficulty][i]);
+        
+    }
+};
+
+
+function showStartMenu() {
+    $('.start-menu').show();
+    attempts = 0;
+    $('#attempt').text(attempts);
+    $('.diff').on('click', function () {
+        difficulty = $(this).attr('id');
+        console.log(difficulty);
+    });
+
+};
 
 $('#start-btn').on('click', startGame);
+
 function startGame() {
     pick1 = undefined;
     pick2 = undefined;
@@ -30,6 +53,7 @@ function startGame() {
 
 function generateCards() {
     let gameTypes = { easy: 12, medium: 18, hard: 24 };
+    let tempCardList = [];
     tempCardList = createCardList(gameTypes[difficulty]);
     console.log(tempCardList);
     for (let i = 0; i < tempCardList.length; i++) {
@@ -59,7 +83,26 @@ function createCardList(amount) {
     }
     // return shuffle(tempArr);
     return tempArr;
+    // this code comes from bost.ocks.org
+    function shuffle(array) {
+        var m = array.length, t, i;
+
+        // While there remain elements to shuffle…
+        while (m) {
+
+            // Pick a remaining element…
+            i = Math.floor(Math.random() * m--);
+
+            // And swap it with the current element.
+            t = array[m];
+            array[m] = array[i];
+            array[i] = t;
+        }
+
+        return array;
+    }
 }
+
 // const cardList = ['card1', 'card1', 'card2', 'card2', 'card3', 'card3', 'card4', 'card4', 'card5', 'card5', 'card6', 'card6',];
 
 
@@ -132,13 +175,15 @@ function gameWon() {
 };
 function congratulator() {
     $('.modal').show();
-    $('#backToStart').on('click',startMenu);
+    confetti.start();
+    $('#backToStart').on('click', startMenu);
     $('#replay').on('click', startAgain);
+    setTimeout(confetti.stop, 2000);
 
-    function startMenu(){
+    function startMenu() {
         $('.modal').hide();
         $('.card').remove();
-        $('.start-menu').show();
+        showStartMenu();
     }
 
     function startAgain() {
@@ -149,23 +194,4 @@ function congratulator() {
 }
 
 
-
-// this code comes from bost.ocks.org
-function shuffle(array) {
-    var m = array.length, t, i;
-
-    // While there remain elements to shuffle…
-    while (m) {
-
-        // Pick a remaining element…
-        i = Math.floor(Math.random() * m--);
-
-        // And swap it with the current element.
-        t = array[m];
-        array[m] = array[i];
-        array[i] = t;
-    }
-
-    return array;
-}
 

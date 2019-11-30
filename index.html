@@ -15,8 +15,36 @@
     <div class="container">
         <div class="top-box">
             <div class="score-board border-box">
+                <div class="score-item">
                     <p>Attempts: <span id="attempt"></span> </p>
-                    <p>Game mode:  <span id="difficulty"></span></p>
+                    <p>Game mode: <span id="difficulty"></span></p>
+                </div>
+                <div class="score-item">
+                    <table>
+                        <tr>
+                            <th colspan="4">Highscore:</th>
+                        </tr>
+                        <tr>
+                            <td>1st</td>
+                            <td class="score" id="place0"></td>
+                            <td>4th</td>
+                            <td class="score" id="place3"></td>
+                        </tr>
+                        <tr>
+                            <td>2nd</td>
+                            <td class="score" id="place1"></td>
+                            <td>5th</td>
+                            <td class="score" id="place4"></td>
+                        </tr>
+                        <tr>
+                            <td>3rd</td>
+                            <td class="score" id="place2"></td>
+                            <td>6th</td>
+                            <td class="score" id="place5"></td>
+                        </tr>
+                    </table>
+                </div>
+
             </div>
         </div>
         <div class="game-box">
@@ -35,7 +63,7 @@
                 </div>
             </div>
             <div class="card-container">
-                    
+
             </div>
             <!-- <div class="score-data">
                 <span>Attempts </span><span id="attempt"></span>
@@ -49,8 +77,8 @@
                     <button id="backToStart">Back to start menu</button>
                     <button id="replay">Play Again?</button>
                 </div>
-                
-              </div>
+
+            </div>
         </div>
     </div>
 
