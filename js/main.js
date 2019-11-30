@@ -1,7 +1,13 @@
 let defaultImg = ['./img/ca1.jpg', './img/ca2.jpg', './img/ca3.jpg', './img/ca4.jpg', './img/ca5.jpg', './img/ca6.jpg', './img/ca7.jpg', './img/ca8.jpg', './img/ca9.jpg', './img/ca10.jpg', './img/ca11.jpg', './img/ca12.jpg'];
-
+let pick1;
+let pick2;
+let attempts = 0;
+$('#attempt').text(attempts);
+$('.modal').hide();
 $('.card-container').hide();
 let difficulty = 'easy';
+
+
 $('.diff').on('click', function () {
     difficulty = $(this).attr('id');
     console.log(difficulty);
@@ -9,6 +15,8 @@ $('.diff').on('click', function () {
 
 $('#start-btn').on('click', startGame);
 function startGame() {
+    pick1 = undefined;
+    pick2 = undefined;
     attempts = 0;
     $('#attempt').text(attempts);
     $('.start-menu').hide();
@@ -49,29 +57,14 @@ function createCardList(amount) {
         tempArr.push(`card${i}`);
         i++;
     }
-    return shuffle(tempArr);
-    // return tempArr;
+    // return shuffle(tempArr);
+    return tempArr;
 }
-const cardList = ['card1', 'card1', 'card2', 'card2', 'card3', 'card3', 'card4', 'card4', 'card5', 'card5', 'card6', 'card6',];
-
-let pick1;
-let pick2;
-let attempts = 0;
-$('#attempt').text(attempts);
-
-const allCards = document.getElementsByClassName('card');
-
-// function distributeCards(cardArr) {
-//     let cardShuffle = shuffle(cardArr);
-//     for (let i = 0; i < allCards.length; i++) {
-//         $(allCards[i]).addClass(`${cardShuffle[i]}`);
-
-//     }
-// };
-// remove commentout and remove the cardnumbers in the html
-// distributeCards(cardList);
+// const cardList = ['card1', 'card1', 'card2', 'card2', 'card3', 'card3', 'card4', 'card4', 'card5', 'card5', 'card6', 'card6',];
 
 
+
+// const allCards = document.getElementsByClassName('card');
 
 function flipCard(x) {
     // console.log($(this).attr('id'));
@@ -98,7 +91,7 @@ function flipCard(x) {
 
 
 };
-
+let highScore = [];
 // This function checks if both card picks are the same
 function checkCards() {
     attempts += 1;
@@ -108,8 +101,7 @@ function checkCards() {
         console.log('well done');
 
         if (gameWon()) {
-            alert('congratulations');
-            startAgain();
+            congratulator();
 
         } else {
             pick1 = undefined;
@@ -138,15 +130,24 @@ function gameWon() {
         return false;
     };
 };
-function startAgain() {
-    pick1 = undefined;
-    pick2 = undefined;
-    $('.card').remove();
-    startGame()
-    // for (let i = 0; i < allCards.length; i++) {
-    //     $(allCards[i]).addClass('hidden');
+function congratulator() {
+    $('.modal').show();
+    $('#backToStart').on('click',startMenu);
+    $('#replay').on('click', startAgain);
 
+    function startMenu(){
+        $('.modal').hide();
+        $('.card').remove();
+        $('.start-menu').show();
+    }
+
+    function startAgain() {
+        $('.modal').hide();
+        $('.card').remove();
+        startGame()
+    }
 }
+
 
 
 // this code comes from bost.ocks.org

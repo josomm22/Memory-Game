@@ -14,13 +14,13 @@
 <body>
     <div class="container">
         <div class="top-box">
-            <div class="score-board">
+            <div class="score-board border-box">
                     <p>Attempts: <span id="attempt"></span> </p>
                     <p>Game mode:  <span id="difficulty"></span></p>
             </div>
         </div>
         <div class="game-box">
-            <div class="start-menu">
+            <div class="start-menu border-box">
                 <h2>Choose your difficulty</h2>
                 <div class="diff-choice">
                     <div class="diff" id="easy">Easy</div>
@@ -41,9 +41,21 @@
                 <span>Attempts </span><span id="attempt"></span>
             </div> -->
         </div>
+        <div class="modal">
+            <div class="modal-content border-box">
+                <p>Congratulations!!</p>
+                <p> A winner is you!!!</p>
+                <div class="button-holder">
+                    <button id="backToStart">Back to start menu</button>
+                    <button id="replay">Play Again?</button>
+                </div>
+                
+              </div>
+        </div>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./js/confetti.js"></script>
     <script src="./js/main.js"></script>
 </body>
 
