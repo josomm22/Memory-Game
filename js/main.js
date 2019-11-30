@@ -17,7 +17,7 @@ showStartMenu();
 updateHScore();
 
 function updateHScore() {
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 6; i++) {
         $(`#place${i}`).text(`${hScore[difficulty][i][1]} score: ${hScore[difficulty][i][0]}`);
 
     }
@@ -169,7 +169,7 @@ function congratulator() {
     if (attempts < hScore[difficulty][5][0]) {
         $(".new-highscore").show();
         $('#name-input').on('click', highScoreUpdate);
-    } else {
+    }else{
         $('.button-holder').show();
     }
 
@@ -187,10 +187,10 @@ function congratulator() {
         startGame()
     }
 
-    function highScoreUpdate() {
+    function highScoreUpdate(){
         let newName = $('#new-name').val();
-        hScore[difficulty].splice(5, 1);
-        hScore[difficulty].unshift([attempts, newName]);
+        hScore[difficulty].splice(5,1,);
+        hScore[difficulty].unshift([attempts,newName]);
         $(".new-highscore").hide();
         $('.button-holder').show();
         updateHScore();
