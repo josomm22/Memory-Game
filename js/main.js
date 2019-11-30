@@ -3,11 +3,7 @@ let pick1;
 let pick2;
 let attempts = 0;
 let difficulty = 'easy';
-let hScore = {
-    easy: [[59, 'hakuna'], [58, 'kakuna'], [57, 'papi'], [56, 'rere'], [55, 'rerer'], [54, 'yyytt']],
-    medium: [[64, 'hakuna'], [63, 'kakuna'], [62, 'papi'], [61, 'rere'], [60, 'rerer'], [59, 'yyytt']],
-    hard: [[70, 'hakuna'], [69, 'kakuna'], [68, 'papi'], [67, 'rere'], [66, 'rerer'], , [65, 'yyytt']],
-}
+let hScore = loadHScore();
 $('.modal').hide();
 $('.card-container').hide();
 $('.start-menu').show();
@@ -15,6 +11,21 @@ $('.start-menu').show();
 
 showStartMenu();
 updateHScore();
+
+function loadHScore() {
+    let defaultData = {
+        easy: [[59, 'hakuna'], [58, 'kakuna'], [57, 'papi'], [56, 'rere'], [55, 'rerer'], [54, 'yyytt']],
+        medium: [[64, 'hakuna'], [63, 'kakuna'], [62, 'papi'], [61, 'rere'], [60, 'rerer'], [59, 'yyytt']],
+        hard: [[70, 'hakuna'], [69, 'kakuna'], [68, 'papi'], [67, 'rere'], [66, 'rerer'], , [65, 'yyytt']],
+    }
+    let scoreData = localStorage.getItem('memGameScore');
+    if (scoreData != null) {
+        scoreData = JSON.parse(scoreData);
+        return scoreData;
+    } else {
+        return defaultData;
+    }
+};
 
 function updateHScore() {
     for (let i = 0; i < 6; i++) {
@@ -66,7 +77,6 @@ function generateCards() {
         $(cardInner).append(cardFront);
         $(cardInner).append(cardBack);
         $(cardOuter).append(cardInner);
-        // $card.css("background-image", `url()`
         $('.card-container').append(cardOuter);
     }
 
@@ -79,8 +89,11 @@ function createCardList(amount) {
         tempArr.push(`card${i}`);
         i++;
     }
-    // return shuffle(tempArr);
-    return tempArr;
+    // enable this to randomize cards
+    return shuffle(tempArr);
+    // enable this to stop randomization
+    // return tempArr;
+
     // this code comes from bost.ocks.org
     function shuffle(array) {
         var m = array.length, t, i;
@@ -100,8 +113,8 @@ function createCardList(amount) {
         return array;
     }
 }
-
-function flipCard(x) {
+// I nested 3 functions within each other, not sure if its good practice or not
+function flipCard() {
 
     if ((this).classList.contains('hidden')) {
         if (pick1 === undefined) {
@@ -117,39 +130,44 @@ function flipCard(x) {
         } else if (pick1 != undefined && pick2 != undefined) {
         }
     } else {
-    }
+    };
+    // This function checks if both card picks are the same if not it flips them back
 
+    function checkCards() {
+        attempts += 1;
+        $('#attempt').text(attempts);
 
-};
-let highScore = [];
-// This function checks if both card picks are the same
-function checkCards() {
-    attempts += 1;
-    $('#attempt').text(attempts);
+        if (pick1.attr('class') === pick2.attr('class')) {
 
-    if (pick1.attr('class') === pick2.attr('class')) {
+            if (gameWon()) {
+                congratulator();
 
-        if (gameWon()) {
-            congratulator();
-
-        } else {
+            } else {
+                pick1 = undefined;
+                pick2 = undefined;
+            };
+        }
+        else {
+            flipBack(pick1, pick2);
             pick1 = undefined;
             pick2 = undefined;
-        }
-    }
-    else {
-        flipBack(pick1, pick2);
-        pick1 = undefined;
-        pick2 = undefined;
-    }
+        };
+
+        function flipBack(pick1, pick2) {
+
+            $(pick1).addClass('hidden');
+            $(pick2).addClass('hidden');
+
+        };
+
+    };
+
 
 };
-function flipBack(pick1, pick2) {
 
-    $(pick1).addClass('hidden');
-    $(pick2).addClass('hidden');
 
-};
+
+
 function gameWon() {
     let hiddenCards = document.getElementsByClassName('hidden');
     if (hiddenCards.length === 0) {
@@ -169,7 +187,7 @@ function congratulator() {
     if (attempts < hScore[difficulty][5][0]) {
         $(".new-highscore").show();
         $('#name-input').on('click', highScoreUpdate);
-    }else{
+    } else {
         $('.button-holder').show();
     }
 
@@ -179,23 +197,30 @@ function congratulator() {
         $('.modal').hide();
         $('.card').remove();
         showStartMenu();
-    }
+    };
 
     function startAgain() {
         $('.modal').hide();
         $('.card').remove();
         startGame()
-    }
+    };
 
-    function highScoreUpdate(){
+    function highScoreUpdate() {
         let newName = $('#new-name').val();
-        hScore[difficulty].splice(5,1,);
-        hScore[difficulty].unshift([attempts,newName]);
+        newName = newName.slice(0, 7);
+        hScore[difficulty].splice(5, 1);
+        hScore[difficulty].unshift([attempts, newName]);
         $(".new-highscore").hide();
         $('.button-holder').show();
         updateHScore();
+        saveHScore();
 
+    };
+    function saveHScore() {
+        let scoreData = JSON.stringify(hScore);
+        localStorage.setItem('memGameScore', scoreData);
     }
+
 }
 
 
