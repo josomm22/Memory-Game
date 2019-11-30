@@ -16,7 +16,7 @@ function loadHScore() {
     let defaultData = {
         easy: [[59, 'hakuna'], [58, 'kakuna'], [57, 'papi'], [56, 'rere'], [55, 'rerer'], [54, 'yyytt']],
         medium: [[64, 'hakuna'], [63, 'kakuna'], [62, 'papi'], [61, 'rere'], [60, 'rerer'], [59, 'yyytt']],
-        hard: [[70, 'hakuna'], [69, 'kakuna'], [68, 'papi'], [67, 'rere'], [66, 'rerer'], , [65, 'yyytt']],
+        hard: [[70, 'hakuna'], [69, 'kakuna'], [68, 'papi'], [67, 'rere'], [66, 'rerer'], [65, 'yyytt']],
     }
     let scoreData = localStorage.getItem('memGameScore');
     if (scoreData != null) {
@@ -218,6 +218,4 @@ function congratulator() {
     }
 
 }
-
-
 

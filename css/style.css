@@ -187,31 +187,6 @@ p {
 
 }
 
-@media only screen and (max-width:900px){
-    .card{
-        height: 17vh;
-        width: 15vw;
-    }
-    .card img{
-        height: 17vh;
-        width: 15vw;
-    }
-}
-@media only screen and (max-width:568px){
-    .card{
-         height: 13vh;
-         width: 23vw;
-    }
-     
-     .card img{
-         height: 13vh;
-         width: 23vw;
-     }
-     table{
-         float: right;
-         font-size: 0.8rem;
-     }
- }
 .flip-card {
     background-color: transparent;
     width: 300px;
@@ -326,3 +301,31 @@ input{
     background-color: rgb(234, 250, 95);
 
 }
+@media only screen and (max-width:900px){
+    .card{
+        height: 17vh;
+        width: 15vw;
+    }
+    .card img{
+        height: 17vh;
+        width: 15vw;
+    }
+}
+@media only screen and (max-width:568px){
+    .card{
+         height: 13vh;
+         width: 23vw;
+    }
+     
+     .card img{
+         height: 13vh;
+         width: 23vw;
+     }
+     table{
+         float: right;
+         font-size: 0.8rem;
+     }
+     .modal-content{
+         height: 330px;
+     }
+ }
